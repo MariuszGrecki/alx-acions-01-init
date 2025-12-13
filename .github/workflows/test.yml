@@ -1,8 +1,9 @@
 name: Test Log Output
 env:
   REPO_NAME: ${{ github.event.repository.name }}
-..
+
 on: [push]
+
 jobs:
   print-logs:
     runs-on: ubuntu-latest
