@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: "Raport - ${{ github.repository }}"
-          to: "mariusz.grecki87@gmail.com"
+          to: "adam@jurkiewicz.tech, mariusz.grecki87@gmail.com"
           from: ${{ secrets.MAIL_USERNAME }}
           body: |
             Zadanie wykonane z repozytorium: ${{ github.repository }}
