@@ -25,7 +25,8 @@ pipeline {
                         python3 -m venv venv
                         . venv/bin/activate
                         pip install -r requirements.txt
-                        python3 app.py
+                        nohup python3 app.py > app.log 2>&1 &
+                        sleep 3
                         '''
                 }
             }
