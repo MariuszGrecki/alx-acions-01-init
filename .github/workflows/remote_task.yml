@@ -1,0 +1,35 @@
+name: Remote SSH and Email Notification
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  remote-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote commands via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ls -la
+
+      - name: Send mail
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: mail.abix.info.pl
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Raport - ${{ github.repository }}"
+          to: "adam@jurkiewicz.tech, mariusz.grecki87@gmail.com"
+          from: ${{ secrets.MAIL_USERNAME }}
+          body: |
+            Zadanie wykonane z repozytorium: ${{ github.repository }}
+            Status zadania SSH: ${{ job.status }}
