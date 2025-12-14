@@ -2,6 +2,8 @@
 Init for actions
 
 
+v2
+
 ```
 python -m venv .venv
 source .venv/bin/activate
